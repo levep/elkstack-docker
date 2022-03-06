@@ -1,0 +1,29 @@
+PUT /index-pipagg
+{
+  "mappings": {
+    "properties": {
+      "type": {
+        "type": "keyword"
+      },
+      "date": {
+        "type": "date"
+      }
+    }
+  }
+}
+
+PUT /_bulk  
+{"index":{"_index":"index-pipagg"}}
+{"date": "2019-01-01", "price": 200, "promoted": true, "rating": 1, "type": "hat"}
+{"index":{"_index":"index-pipagg"}}
+{"date": "2019-01-01", "price": 200, "promoted": true, "rating": 1, "type": "t-shirt"}
+{"index":{"_index":"index-pipagg"}}
+{"date": "2019-01-01", "price": 150, "promoted": true, "rating": 5, "type": "bag"}
+{"index":{"_index":"index-pipagg"}}
+{"date": "2019-02-01", "price": 50, "promoted": false, "rating": 1, "type": "hat"}
+{"index":{"_index":"index-pipagg"}}
+{"date": "2019-02-01", "price": 10, "promoted": true, "rating": 4, "type": "t-shirt"}
+{"index":{"_index":"index-pipagg"}}
+{"date": "2019-03-01", "price": 200, "promoted": true, "rating": 1, "type": "hat"}
+{"index":{"_index":"index-pipagg"}}
+{"date": "2019-03-01", "price": 175, "promoted": false, "rating":2, "type": "t-shirt"}
