@@ -1,6 +1,33 @@
 version: '3.2'
 
 services:
+  elasticsearch-exporter:
+    image: quay.io/prometheuscommunity/elasticsearch-exporter:latest
+    command:
+      - '--es.uri=http://elastic:changeme@elasticsearch:9200'
+    ports:
+      - '9114:9114'
+    networks:
+      - elk
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - '9090:9090'
+    networks:
+      - elk
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin 
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - elk
+
   elasticsearch:
     build:
       context: elasticsearch/
@@ -63,6 +90,7 @@ services:
         read_only: true
     ports:
       - "5601:5601"
+      - "80:5601"
     networks:
       - elk
     depends_on:
@@ -74,3 +102,4 @@ networks:
 
 volumes:
   elasticsearch:
+  grafana-data:
